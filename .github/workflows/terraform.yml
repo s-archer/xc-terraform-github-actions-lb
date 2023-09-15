@@ -8,7 +8,7 @@ on:
 jobs:
  
   terraform-waf-rules:
-    name: "Test & Apply WAF Exceptions"
+    name: "Test & Apply LB"
     runs-on: ubuntu-latest
 
     steps:
@@ -21,62 +21,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.2.4
-
-      - name: Record Start Timestamp
-        run: |
-          echo "TF_VAR_timestamp_start=$(date +%s)" >> $GITHUB_ENV
-
-      - name: Run Application Tests
-        run: |
-          sleep 5
-          curl 'https://juiceshop-waf.volt.archf5.com/rest/products/1/reviews?a%20or%201%3D1%3B%20select%20%2A%20from%20mysql.user' \
-           -H 'authority: juiceshop-waf.volt.archf5.com' \
-           -H 'accept: application/json, text/plain, */*' \
-           -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \
-           -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6MjEsInVzZXJuYW1lIjoiIiwiZW1haWwiOiJxd2VAcXdlLnF3ZSIsInBhc3N3b3JkIjoiYTcwNDVjMGNjZDVkMzAzNTNiYzYxNDgxOTVkODM2YjMiLCJyb2xlIjoiY3VzdG9tZXIiLCJkZWx1eGVUb2tlbiI6IiIsImxhc3RMb2dpbklwIjoiMC4wLjAuMCIsInByb2ZpbGVJbWFnZSI6Ii9hc3NldHMvcHVibGljL2ltYWdlcy91cGxvYWRzL2RlZmF1bHQuc3ZnIiwidG90cFNlY3JldCI6IiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJ1cGRhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJkZWxldGVkQXQiOm51bGx9LCJpYXQiOjE2NTgzODk4MjgsImV4cCI6MTY1ODQwNzgyOH0.dz93ieZB5OQQ-Dyxz9DFjy34KMTapTvJu6TmZGgbh-7lWQRx3egBbX0wW32-yymo6QamMZKDRC_uzkfXcHJWsiUX6CEgP3O8w4OMq-ETYL5uuv0mwL6BLMDScotPFlzStJOHOMKLWoGNiytOmaus8mMdI-tf1qsQosFhD35M00o' \
-           -H 'cache-control: no-cache' \
-           -H 'cookie: language=en; _imp_apg_r_=%7B%22diA%22%3A%22AeU%2F2GIAAAAAMkvN%2Bin9mmRwh3Hk9mVm%22%2C%22diB%22%3A%22Afe7mHagwHuSTDi9y4lqSPM1dWLspxkS%22%7D; _imp_di_pc_=AeU%2F2GIAAAAAMkvN%2Bin9mmRwh3Hk9mVm; 471d5=1658339312730-986149438; 471d03=QnP8f6VRKgWnJ3j8X6Wg0qCTnC5e6xE77WXVAS9eaPxRQCLTLA5B6gPeomumfKrRAWEz9cuokiWv3gpPoK+uQl8Jn9I80MCgfOdJjIMzYiA8TPTy1JnUdReKuiL+I1fXCRCMeWcwqIbQWY80xP7UzeEJRaxKbjc6DVfJ1ktfkk3dMPR1; 471d1=78265d438c65999f8ecf40e794f67c450000d9938b6181be93d2; ea0a5=1658383579469-861820129; ea0a1=411861d7529cbd920e1deb2c24378eb60000d4e3c2aa286845f1; ea0a03=RpGjXpD6iXnlY8Fxa09WI5OpHEtRpz5gLGKyjrZbYT1uwH+RJjueT8mYRzPx4swy8duo+qvlZOXnGFVD8DBuNz7+SiTFOdtfsusoQDXLBChVD3h3j5OX3gxqUlQDxTFzR65FDFL97d7ujovYrkWRk9RjxHs80QY7V4BxNsnx5xXTuAKy; TS01dc4fc6=014c8ff5015f3c82fd12eed38cfeb58938b56c0cfe1f52722b7defb04817abd30c24032a483a6e93747ec9fc4a8dde6399d4f5f52c; welcomebanner_status=dismiss; f2525=1658389746506-674591810; cookieconsent_status=dismiss; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6MjEsInVzZXJuYW1lIjoiIiwiZW1haWwiOiJxd2VAcXdlLnF3ZSIsInBhc3N3b3JkIjoiYTcwNDVjMGNjZDVkMzAzNTNiYzYxNDgxOTVkODM2YjMiLCJyb2xlIjoiY3VzdG9tZXIiLCJkZWx1eGVUb2tlbiI6IiIsImxhc3RMb2dpbklwIjoiMC4wLjAuMCIsInByb2ZpbGVJbWFnZSI6Ii9hc3NldHMvcHVibGljL2ltYWdlcy91cGxvYWRzL2RlZmF1bHQuc3ZnIiwidG90cFNlY3JldCI6IiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJ1cGRhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJkZWxldGVkQXQiOm51bGx9LCJpYXQiOjE2NTgzODk4MjgsImV4cCI6MTY1ODQwNzgyOH0.dz93ieZB5OQQ-Dyxz9DFjy34KMTapTvJu6TmZGgbh-7lWQRx3egBbX0wW32-yymo6QamMZKDRC_uzkfXcHJWsiUX6CEgP3O8w4OMq-ETYL5uuv0mwL6BLMDScotPFlzStJOHOMKLWoGNiytOmaus8mMdI-tf1qsQosFhD35M00o; 01bc03=wIG2A2Ygbqs9s80EVIRO1xw9uVQPWV1iv7Qzvg2NdKuIGnavdT+um+iiQD/lm+Ko7u+bTYGqn0RVQoptOohmPiGKdbTz5aiWybhUZNxIQjTAOkbzBmorP0dtXrrh4WB+ZB8hN/XNQzWxP5AuRgYIHh+1snOXr1zXvuJJySPFztNHnDEq; f25203=ITRanDO1i9Xd6CPj62n3vQzsSgt1EehgUf48CJ1P3BEkxfO5klXPvtaYa3qWCEeJWFQ1RMnGywlBb1Wt9FEeV4hyF5BD6tYnN0nY1FGMMy9LT1rlPDA8qUpDx5X0R42oSlyTxSLe1MPptSXzTSgQh7QEqJygxi7MwLs0H9zsW1+OVhmh; 01bc1=337bff4da4ba7b9e13eed15bc4536af90000fe6441d1dc08ee96; f2521=337bff4da4ba7b9e13eed15bc4536af900005fc6d518de78de37' \
-           -H 'pragma: no-cache' \
-           -H 'referer: https://juiceshop-waf.volt.archf5.com/' \
-           -H 'sec-ch-ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"' \
-           -H 'sec-ch-ua-mobile: ?0' \
-           -H 'sec-ch-ua-platform: "macOS"' \
-           -H 'sec-fetch-dest: empty' \
-           -H 'sec-fetch-mode: cors' \
-           -H 'sec-fetch-site: same-origin' \
-           -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36' \
-           --compressed
-           curl 'https://juiceshop-waf.volt.archf5.com/../../etc/passwd' \
-            -H 'authority: juiceshop-waf.volt.archf5.com' \
-            -H 'accept: application/json, text/plain, */*' \
-            -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \
-            -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6MjEsInVzZXJuYW1lIjoiIiwiZW1haWwiOiJxd2VAcXdlLnF3ZSIsInBhc3N3b3JkIjoiYTcwNDVjMGNjZDVkMzAzNTNiYzYxNDgxOTVkODM2YjMiLCJyb2xlIjoiY3VzdG9tZXIiLCJkZWx1eGVUb2tlbiI6IiIsImxhc3RMb2dpbklwIjoiMC4wLjAuMCIsInByb2ZpbGVJbWFnZSI6Ii9hc3NldHMvcHVibGljL2ltYWdlcy91cGxvYWRzL2RlZmF1bHQuc3ZnIiwidG90cFNlY3JldCI6IiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJ1cGRhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJkZWxldGVkQXQiOm51bGx9LCJpYXQiOjE2NTgzODk4MjgsImV4cCI6MTY1ODQwNzgyOH0.dz93ieZB5OQQ-Dyxz9DFjy34KMTapTvJu6TmZGgbh-7lWQRx3egBbX0wW32-yymo6QamMZKDRC_uzkfXcHJWsiUX6CEgP3O8w4OMq-ETYL5uuv0mwL6BLMDScotPFlzStJOHOMKLWoGNiytOmaus8mMdI-tf1qsQosFhD35M00o' \
-            -H 'cache-control: no-cache' \
-            -H 'cookie: language=en; _imp_apg_r_=%7B%22diA%22%3A%22AeU%2F2GIAAAAAMkvN%2Bin9mmRwh3Hk9mVm%22%2C%22diB%22%3A%22Afe7mHagwHuSTDi9y4lqSPM1dWLspxkS%22%7D; _imp_di_pc_=AeU%2F2GIAAAAAMkvN%2Bin9mmRwh3Hk9mVm; 471d5=1658339312730-986149438; 471d03=QnP8f6VRKgWnJ3j8X6Wg0qCTnC5e6xE77WXVAS9eaPxRQCLTLA5B6gPeomumfKrRAWEz9cuokiWv3gpPoK+uQl8Jn9I80MCgfOdJjIMzYiA8TPTy1JnUdReKuiL+I1fXCRCMeWcwqIbQWY80xP7UzeEJRaxKbjc6DVfJ1ktfkk3dMPR1; 471d1=78265d438c65999f8ecf40e794f67c450000d9938b6181be93d2; ea0a5=1658383579469-861820129; ea0a1=411861d7529cbd920e1deb2c24378eb60000d4e3c2aa286845f1; ea0a03=RpGjXpD6iXnlY8Fxa09WI5OpHEtRpz5gLGKyjrZbYT1uwH+RJjueT8mYRzPx4swy8duo+qvlZOXnGFVD8DBuNz7+SiTFOdtfsusoQDXLBChVD3h3j5OX3gxqUlQDxTFzR65FDFL97d7ujovYrkWRk9RjxHs80QY7V4BxNsnx5xXTuAKy; TS01dc4fc6=014c8ff5015f3c82fd12eed38cfeb58938b56c0cfe1f52722b7defb04817abd30c24032a483a6e93747ec9fc4a8dde6399d4f5f52c; welcomebanner_status=dismiss; f2525=1658389746506-674591810; cookieconsent_status=dismiss; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6MjEsInVzZXJuYW1lIjoiIiwiZW1haWwiOiJxd2VAcXdlLnF3ZSIsInBhc3N3b3JkIjoiYTcwNDVjMGNjZDVkMzAzNTNiYzYxNDgxOTVkODM2YjMiLCJyb2xlIjoiY3VzdG9tZXIiLCJkZWx1eGVUb2tlbiI6IiIsImxhc3RMb2dpbklwIjoiMC4wLjAuMCIsInByb2ZpbGVJbWFnZSI6Ii9hc3NldHMvcHVibGljL2ltYWdlcy91cGxvYWRzL2RlZmF1bHQuc3ZnIiwidG90cFNlY3JldCI6IiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJ1cGRhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJkZWxldGVkQXQiOm51bGx9LCJpYXQiOjE2NTgzODk4MjgsImV4cCI6MTY1ODQwNzgyOH0.dz93ieZB5OQQ-Dyxz9DFjy34KMTapTvJu6TmZGgbh-7lWQRx3egBbX0wW32-yymo6QamMZKDRC_uzkfXcHJWsiUX6CEgP3O8w4OMq-ETYL5uuv0mwL6BLMDScotPFlzStJOHOMKLWoGNiytOmaus8mMdI-tf1qsQosFhD35M00o; 01bc03=wIG2A2Ygbqs9s80EVIRO1xw9uVQPWV1iv7Qzvg2NdKuIGnavdT+um+iiQD/lm+Ko7u+bTYGqn0RVQoptOohmPiGKdbTz5aiWybhUZNxIQjTAOkbzBmorP0dtXrrh4WB+ZB8hN/XNQzWxP5AuRgYIHh+1snOXr1zXvuJJySPFztNHnDEq; f25203=ITRanDO1i9Xd6CPj62n3vQzsSgt1EehgUf48CJ1P3BEkxfO5klXPvtaYa3qWCEeJWFQ1RMnGywlBb1Wt9FEeV4hyF5BD6tYnN0nY1FGMMy9LT1rlPDA8qUpDx5X0R42oSlyTxSLe1MPptSXzTSgQh7QEqJygxi7MwLs0H9zsW1+OVhmh; 01bc1=337bff4da4ba7b9e13eed15bc4536af90000fe6441d1dc08ee96; f2521=337bff4da4ba7b9e13eed15bc4536af900005fc6d518de78de37' \
-            -H 'pragma: no-cache' \
-            -H 'referer: https://juiceshop-waf.volt.archf5.com/' \
-            -H 'sec-ch-ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"' \
-            -H 'sec-ch-ua-mobile: ?0' \
-            -H 'sec-ch-ua-platform: "macOS"' \
-            -H 'sec-fetch-dest: empty' \
-            -H 'sec-fetch-mode: cors' \
-            -H 'sec-fetch-site: same-origin' \
-            -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36' \
-            --compressed
-          sleep 5
-        continue-on-error: true
-
-      # Adding wait here because 10s between start/emd timestamp is no longer supported.  Needs to be longer.  Also need to allow time for events 
-      # to become available in elastic search
-
-      - name: Wait For Events Into DB
-        run: |  
-          sleep 61
-
-      - name: Record End Timestamp
-        run: |  
-          echo "TF_VAR_timestamp_end=$(date +%s)" >> $GITHUB_ENV
-
+          
       - name: Terraform Init
         id: init1
         run: |
@@ -102,17 +47,72 @@ jobs:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
           # TF_LOG: debug 
 
-      - name: Stage Changed Files
+      - name: Record Start Timestamp
         run: |
-          git config --global user.email "github@github.com"
-          git config --global user.name "Github Actions"
-          git add .
+          echo "TF_VAR_timestamp_start=$(date +%s)" >> $GITHUB_ENV
 
-      - name: Commit Changed Files
-        run: git commit -m "Auto updating after TF Apply.txt" --allow-empty
+      - name: Run Application Tests
+        run: |
+          sleep 5
+          curl 'https://juiceshop-lb.volt.archf5.com/rest/products/1/reviews?a%20or%201%3D1%3B%20select%20%2A%20from%20mysql.user' \
+           -H 'authority: juiceshop-lb.volt.archf5.com' \
+           -H 'accept: application/json, text/plain, */*' \
+           -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \
+           -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6MjEsInVzZXJuYW1lIjoiIiwiZW1haWwiOiJxd2VAcXdlLnF3ZSIsInBhc3N3b3JkIjoiYTcwNDVjMGNjZDVkMzAzNTNiYzYxNDgxOTVkODM2YjMiLCJyb2xlIjoiY3VzdG9tZXIiLCJkZWx1eGVUb2tlbiI6IiIsImxhc3RMb2dpbklwIjoiMC4wLjAuMCIsInByb2ZpbGVJbWFnZSI6Ii9hc3NldHMvcHVibGljL2ltYWdlcy91cGxvYWRzL2RlZmF1bHQuc3ZnIiwidG90cFNlY3JldCI6IiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJ1cGRhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJkZWxldGVkQXQiOm51bGx9LCJpYXQiOjE2NTgzODk4MjgsImV4cCI6MTY1ODQwNzgyOH0.dz93ieZB5OQQ-Dyxz9DFjy34KMTapTvJu6TmZGgbh-7lWQRx3egBbX0wW32-yymo6QamMZKDRC_uzkfXcHJWsiUX6CEgP3O8w4OMq-ETYL5uuv0mwL6BLMDScotPFlzStJOHOMKLWoGNiytOmaus8mMdI-tf1qsQosFhD35M00o' \
+           -H 'cache-control: no-cache' \
+           -H 'cookie: language=en; _imp_apg_r_=%7B%22diA%22%3A%22AeU%2F2GIAAAAAMkvN%2Bin9mmRwh3Hk9mVm%22%2C%22diB%22%3A%22Afe7mHagwHuSTDi9y4lqSPM1dWLspxkS%22%7D; _imp_di_pc_=AeU%2F2GIAAAAAMkvN%2Bin9mmRwh3Hk9mVm; 471d5=1658339312730-986149438; 471d03=QnP8f6VRKgWnJ3j8X6Wg0qCTnC5e6xE77WXVAS9eaPxRQCLTLA5B6gPeomumfKrRAWEz9cuokiWv3gpPoK+uQl8Jn9I80MCgfOdJjIMzYiA8TPTy1JnUdReKuiL+I1fXCRCMeWcwqIbQWY80xP7UzeEJRaxKbjc6DVfJ1ktfkk3dMPR1; 471d1=78265d438c65999f8ecf40e794f67c450000d9938b6181be93d2; ea0a5=1658383579469-861820129; ea0a1=411861d7529cbd920e1deb2c24378eb60000d4e3c2aa286845f1; ea0a03=RpGjXpD6iXnlY8Fxa09WI5OpHEtRpz5gLGKyjrZbYT1uwH+RJjueT8mYRzPx4swy8duo+qvlZOXnGFVD8DBuNz7+SiTFOdtfsusoQDXLBChVD3h3j5OX3gxqUlQDxTFzR65FDFL97d7ujovYrkWRk9RjxHs80QY7V4BxNsnx5xXTuAKy; TS01dc4fc6=014c8ff5015f3c82fd12eed38cfeb58938b56c0cfe1f52722b7defb04817abd30c24032a483a6e93747ec9fc4a8dde6399d4f5f52c; welcomebanner_status=dismiss; f2525=1658389746506-674591810; cookieconsent_status=dismiss; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6MjEsInVzZXJuYW1lIjoiIiwiZW1haWwiOiJxd2VAcXdlLnF3ZSIsInBhc3N3b3JkIjoiYTcwNDVjMGNjZDVkMzAzNTNiYzYxNDgxOTVkODM2YjMiLCJyb2xlIjoiY3VzdG9tZXIiLCJkZWx1eGVUb2tlbiI6IiIsImxhc3RMb2dpbklwIjoiMC4wLjAuMCIsInByb2ZpbGVJbWFnZSI6Ii9hc3NldHMvcHVibGljL2ltYWdlcy91cGxvYWRzL2RlZmF1bHQuc3ZnIiwidG90cFNlY3JldCI6IiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJ1cGRhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJkZWxldGVkQXQiOm51bGx9LCJpYXQiOjE2NTgzODk4MjgsImV4cCI6MTY1ODQwNzgyOH0.dz93ieZB5OQQ-Dyxz9DFjy34KMTapTvJu6TmZGgbh-7lWQRx3egBbX0wW32-yymo6QamMZKDRC_uzkfXcHJWsiUX6CEgP3O8w4OMq-ETYL5uuv0mwL6BLMDScotPFlzStJOHOMKLWoGNiytOmaus8mMdI-tf1qsQosFhD35M00o; 01bc03=wIG2A2Ygbqs9s80EVIRO1xw9uVQPWV1iv7Qzvg2NdKuIGnavdT+um+iiQD/lm+Ko7u+bTYGqn0RVQoptOohmPiGKdbTz5aiWybhUZNxIQjTAOkbzBmorP0dtXrrh4WB+ZB8hN/XNQzWxP5AuRgYIHh+1snOXr1zXvuJJySPFztNHnDEq; f25203=ITRanDO1i9Xd6CPj62n3vQzsSgt1EehgUf48CJ1P3BEkxfO5klXPvtaYa3qWCEeJWFQ1RMnGywlBb1Wt9FEeV4hyF5BD6tYnN0nY1FGMMy9LT1rlPDA8qUpDx5X0R42oSlyTxSLe1MPptSXzTSgQh7QEqJygxi7MwLs0H9zsW1+OVhmh; 01bc1=337bff4da4ba7b9e13eed15bc4536af90000fe6441d1dc08ee96; f2521=337bff4da4ba7b9e13eed15bc4536af900005fc6d518de78de37' \
+           -H 'pragma: no-cache' \
+           -H 'referer: https://juiceshop-lb.volt.archf5.com/' \
+           -H 'sec-ch-ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"' \
+           -H 'sec-ch-ua-mobile: ?0' \
+           -H 'sec-ch-ua-platform: "macOS"' \
+           -H 'sec-fetch-dest: empty' \
+           -H 'sec-fetch-mode: cors' \
+           -H 'sec-fetch-site: same-origin' \
+           -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36' \
+           --compressed
+           curl 'https://juiceshop-lb.volt.archf5.com/../../etc/passwd' \
+            -H 'authority: juiceshop-lb.volt.archf5.com' \
+            -H 'accept: application/json, text/plain, */*' \
+            -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \
+            -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6MjEsInVzZXJuYW1lIjoiIiwiZW1haWwiOiJxd2VAcXdlLnF3ZSIsInBhc3N3b3JkIjoiYTcwNDVjMGNjZDVkMzAzNTNiYzYxNDgxOTVkODM2YjMiLCJyb2xlIjoiY3VzdG9tZXIiLCJkZWx1eGVUb2tlbiI6IiIsImxhc3RMb2dpbklwIjoiMC4wLjAuMCIsInByb2ZpbGVJbWFnZSI6Ii9hc3NldHMvcHVibGljL2ltYWdlcy91cGxvYWRzL2RlZmF1bHQuc3ZnIiwidG90cFNlY3JldCI6IiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJ1cGRhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJkZWxldGVkQXQiOm51bGx9LCJpYXQiOjE2NTgzODk4MjgsImV4cCI6MTY1ODQwNzgyOH0.dz93ieZB5OQQ-Dyxz9DFjy34KMTapTvJu6TmZGgbh-7lWQRx3egBbX0wW32-yymo6QamMZKDRC_uzkfXcHJWsiUX6CEgP3O8w4OMq-ETYL5uuv0mwL6BLMDScotPFlzStJOHOMKLWoGNiytOmaus8mMdI-tf1qsQosFhD35M00o' \
+            -H 'cache-control: no-cache' \
+            -H 'cookie: language=en; _imp_apg_r_=%7B%22diA%22%3A%22AeU%2F2GIAAAAAMkvN%2Bin9mmRwh3Hk9mVm%22%2C%22diB%22%3A%22Afe7mHagwHuSTDi9y4lqSPM1dWLspxkS%22%7D; _imp_di_pc_=AeU%2F2GIAAAAAMkvN%2Bin9mmRwh3Hk9mVm; 471d5=1658339312730-986149438; 471d03=QnP8f6VRKgWnJ3j8X6Wg0qCTnC5e6xE77WXVAS9eaPxRQCLTLA5B6gPeomumfKrRAWEz9cuokiWv3gpPoK+uQl8Jn9I80MCgfOdJjIMzYiA8TPTy1JnUdReKuiL+I1fXCRCMeWcwqIbQWY80xP7UzeEJRaxKbjc6DVfJ1ktfkk3dMPR1; 471d1=78265d438c65999f8ecf40e794f67c450000d9938b6181be93d2; ea0a5=1658383579469-861820129; ea0a1=411861d7529cbd920e1deb2c24378eb60000d4e3c2aa286845f1; ea0a03=RpGjXpD6iXnlY8Fxa09WI5OpHEtRpz5gLGKyjrZbYT1uwH+RJjueT8mYRzPx4swy8duo+qvlZOXnGFVD8DBuNz7+SiTFOdtfsusoQDXLBChVD3h3j5OX3gxqUlQDxTFzR65FDFL97d7ujovYrkWRk9RjxHs80QY7V4BxNsnx5xXTuAKy; TS01dc4fc6=014c8ff5015f3c82fd12eed38cfeb58938b56c0cfe1f52722b7defb04817abd30c24032a483a6e93747ec9fc4a8dde6399d4f5f52c; welcomebanner_status=dismiss; f2525=1658389746506-674591810; cookieconsent_status=dismiss; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6MjEsInVzZXJuYW1lIjoiIiwiZW1haWwiOiJxd2VAcXdlLnF3ZSIsInBhc3N3b3JkIjoiYTcwNDVjMGNjZDVkMzAzNTNiYzYxNDgxOTVkODM2YjMiLCJyb2xlIjoiY3VzdG9tZXIiLCJkZWx1eGVUb2tlbiI6IiIsImxhc3RMb2dpbklwIjoiMC4wLjAuMCIsInByb2ZpbGVJbWFnZSI6Ii9hc3NldHMvcHVibGljL2ltYWdlcy91cGxvYWRzL2RlZmF1bHQuc3ZnIiwidG90cFNlY3JldCI6IiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJ1cGRhdGVkQXQiOiIyMDIyLTA3LTIxIDA3OjUwOjE5LjUyMCArMDA6MDAiLCJkZWxldGVkQXQiOm51bGx9LCJpYXQiOjE2NTgzODk4MjgsImV4cCI6MTY1ODQwNzgyOH0.dz93ieZB5OQQ-Dyxz9DFjy34KMTapTvJu6TmZGgbh-7lWQRx3egBbX0wW32-yymo6QamMZKDRC_uzkfXcHJWsiUX6CEgP3O8w4OMq-ETYL5uuv0mwL6BLMDScotPFlzStJOHOMKLWoGNiytOmaus8mMdI-tf1qsQosFhD35M00o; 01bc03=wIG2A2Ygbqs9s80EVIRO1xw9uVQPWV1iv7Qzvg2NdKuIGnavdT+um+iiQD/lm+Ko7u+bTYGqn0RVQoptOohmPiGKdbTz5aiWybhUZNxIQjTAOkbzBmorP0dtXrrh4WB+ZB8hN/XNQzWxP5AuRgYIHh+1snOXr1zXvuJJySPFztNHnDEq; f25203=ITRanDO1i9Xd6CPj62n3vQzsSgt1EehgUf48CJ1P3BEkxfO5klXPvtaYa3qWCEeJWFQ1RMnGywlBb1Wt9FEeV4hyF5BD6tYnN0nY1FGMMy9LT1rlPDA8qUpDx5X0R42oSlyTxSLe1MPptSXzTSgQh7QEqJygxi7MwLs0H9zsW1+OVhmh; 01bc1=337bff4da4ba7b9e13eed15bc4536af90000fe6441d1dc08ee96; f2521=337bff4da4ba7b9e13eed15bc4536af900005fc6d518de78de37' \
+            -H 'pragma: no-cache' \
+            -H 'referer: https://juiceshop-lb.volt.archf5.com/' \
+            -H 'sec-ch-ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"' \
+            -H 'sec-ch-ua-mobile: ?0' \
+            -H 'sec-ch-ua-platform: "macOS"' \
+            -H 'sec-fetch-dest: empty' \
+            -H 'sec-fetch-mode: cors' \
+            -H 'sec-fetch-site: same-origin' \
+            -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36' \
+            --compressed
+          sleep 5
+        continue-on-error: true
 
-      - name: Push Code To Master
-        run: git push origin HEAD:main
+      # Adding wait here because 10s between start/emd timestamp is no longer supported.  Needs to be longer.  Also need to allow time for events 
+      # to become available in elastic search
+
+      - name: Wait For Events Into DB
+        run: |  
+          sleep 61
+
+      - name: Record End Timestamp
+        run: |  
+          echo "TF_VAR_timestamp_end=$(date +%s)" >> $GITHUB_ENV
+
+      # - name: Stage Changed Files
+      #   run: |
+      #     git config --global user.email "github@github.com"
+      #     git config --global user.name "Github Actions"
+      #     git add .
+
+      # - name: Commit Changed Files
+      #   run: git commit -m "Auto updating after TF Apply.txt" --allow-empty
+
+      # - name: Push Code To Master
+      #   run: git push origin HEAD:main
 
       # - uses: actions/github-script@v6
       #   if: github.event_name == 'pull_request'
