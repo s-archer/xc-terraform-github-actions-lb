@@ -8,8 +8,8 @@ terraform {
 
   backend "azurerm" {
     resource_group_name  = "arch-storage-rg"
-    storage_account_name = "xcterraformgithubactiolb"
-    container_name       = "terraform"
+    storage_account_name = "xcterraformgithubactions"
+    container_name       = "lb-only"
     key                  = "terraform.tfstat"
   }
 }
