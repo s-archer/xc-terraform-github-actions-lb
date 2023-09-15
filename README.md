@@ -18,7 +18,7 @@ Note that the terraform state is stored in an Azure Storage Account.  The key fo
 - 3. initate the create workflow:
     - `git branch dev`
     - `git checkout dev`
-    - make a code change
+    - make a code change (e.g. change the filename `lb_origin.tf.delete` to `lb_origin.tf`)
     - `git add .`
     - `git commit -m "my message"`
     - `git push`   
