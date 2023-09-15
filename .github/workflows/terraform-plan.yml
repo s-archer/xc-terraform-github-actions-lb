@@ -1,8 +1,7 @@
 name: "Terraform Pipeline v1.37"
 on:
   pull_request:
-    branches:
-      - development
+
 jobs:
  
   terraform-lb-plan:
