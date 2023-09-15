@@ -1,7 +1,7 @@
 resource "volterra_origin_pool" "origin" {
-  name                   = format("%s-git-actions-tf-tesco", var.shortname)
+  name                   = format("%s-git-actions-tf", var.shortname)
   namespace              = var.namespace
-  description            = "Terraform created origin pool"
+  description            = "Created by GitHub Actions Terraform"
   endpoint_selection     = "LOCAL_PREFERRED"
   loadbalancer_algorithm = "LB_OVERRIDE"
   port                   = var.origin_port
