@@ -1,8 +1,5 @@
 name: "Terraform Pipeline v1.37"
 on:
-  push:
-    branches:
-      - development
   pull_request:
 
 jobs:
