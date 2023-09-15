@@ -28,7 +28,7 @@ resource "volterra_origin_pool" "origin" {
 resource "volterra_http_loadbalancer" "lb" {
   name        = format("%s-git-actions-tf", var.shortname)
   namespace   = var.namespace
-  description = "Created by GitHub Actions Terraform"
+  description = "Created by GitHub Actions Terraform - for Tesco"
   domains     = [var.domain]
 
   advertise_on_public_default_vip = true
