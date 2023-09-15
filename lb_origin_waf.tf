@@ -1,5 +1,5 @@
 resource "volterra_origin_pool" "origin" {
-  name                   = format("%s-git-actions-tf", var.shortname)
+  name                   = format("%s-git-actions-tf-tesco", var.shortname)
   namespace              = var.namespace
   description            = "Terraform created origin pool"
   endpoint_selection     = "LOCAL_PREFERRED"
@@ -28,7 +28,7 @@ resource "volterra_origin_pool" "origin" {
 resource "volterra_http_loadbalancer" "lb" {
   name        = format("%s-git-actions-tf", var.shortname)
   namespace   = var.namespace
-  description = "Created by GitHub Actions Terraform - for Tesco"
+  description = "Created by GitHub Actions Terraform"
   domains     = [var.domain]
 
   advertise_on_public_default_vip = true
