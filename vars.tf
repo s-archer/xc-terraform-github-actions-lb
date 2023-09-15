@@ -39,6 +39,10 @@ variable "origin_fqdn" {
   type = string
 }
 
+variable "origin_k8s_service_name" {
+  type = string
+}
+
 variable "domain" {
   type = string
 }
