@@ -1,5 +1,5 @@
 locals {
-  api_url                     = format("https://%s.%s/api", var.tenant, var.console_url)
+  api_url = format("https://%s.%s/api", var.tenant, var.console_url)
 }
 
 variable "console_url" {

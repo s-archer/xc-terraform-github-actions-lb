@@ -1,30 +1,34 @@
 resource "volterra_origin_pool" "origin" {
-  name                   = format("%s-git-act-tf", var.shortname)
+  name                   = format("%s-git-actions-tf", var.shortname)
   namespace              = var.namespace
   description            = "Terraform created origin pool"
+  endpoint_selection     = "LOCAL_PREFERRED"
   loadbalancer_algorithm = "LB_OVERRIDE"
+  port                   = var.origin_port
+  no_tls                 = true
 
   origin_servers {
-    public_name {
-      dns_name = var.origin_fqdn
+
+    k8s_service {
+      service_name   = var.origin_k8s_service_name
+      inside_network = true
+
+      site_locator {
+
+        site {
+          namespace = "system"
+          name      = var.origin_site
+        }
+      }
     }
-  }
-  port               = var.origin_port
-  endpoint_selection = "LOCAL_PREFERRED"
-  use_tls {
-    no_mtls                  = true
-    skip_server_verification = true
-    tls_config {
-      default_security = true
-    }
-    use_host_header_as_sni = true
   }
 }
 
+
 resource "volterra_http_loadbalancer" "lb" {
-  name        = format("%s-git-act-tf", var.shortname)
+  name        = format("%s-git-actions-tf", var.shortname)
   namespace   = var.namespace
-  description = "Created by Terraform"
+  description = "Created by GitHub Actions Terraform"
   domains     = [var.domain]
 
   advertise_on_public_default_vip = true
@@ -73,14 +77,5 @@ resource "volterra_app_firewall" "recommended" {
   use_default_blocking_page  = true
   default_bot_setting        = true
   default_detection_settings = true
-  # detection_settings {
-  #   signature_selection_setting {
-  #     default_attack_type_settings = true
-  #     high_medium_low_accuracy_signatures = true
-  #   }
-  #   enable_suppression = true
-  #   enable_threat_campaigns = true
-  #   default_violation_settings = true
-  # }
   use_loadbalancer_setting   = true
 }
