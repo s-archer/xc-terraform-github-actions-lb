@@ -38,7 +38,7 @@ jobs:
       - name: Terraform Output
         id: output
         run: |
-          output_value=$(terraform output -raw domain)
+          output_value=$(terraform output domain)
           echo "TERRAFORM_OUTPUT_DOMAIN=$output_value" >> $GITHUB_ENV
 
       - name: Wait For LB Creation
