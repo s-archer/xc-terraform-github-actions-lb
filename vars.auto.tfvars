@@ -5,7 +5,7 @@ tenant       = "f5-emea-ent"
 namespace    = "s-archer"
 
 # F5 Distributed Cloud LB Details
-domain                  = "example-sentence.volt.archf5.com"
+domain                  = "githubactions-sentence.volt.archf5.com"
 shortname               = "sentence"
 origin_k8s_service_name = "sentence-frontend.api"
 origin_fqdn             = ""
