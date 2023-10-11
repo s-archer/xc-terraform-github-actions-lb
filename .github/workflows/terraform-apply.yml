@@ -20,6 +20,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.2.4
+          terraform_wrapper: false
           
       - name: Terraform Init
         id: init1
@@ -38,7 +39,7 @@ jobs:
       - name: Terraform Output
         id: domain
         run: |
-          output_value=$(terraform output -raw domain | tr -d '\n' | tr -d '%')
+          output_value=$(terraform output -raw domain)
           echo "domain=$output_value" >> $GITHUB_OUTPUT
 
       - name: Wait For LB Creation
