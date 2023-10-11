@@ -26,17 +26,6 @@ jobs:
         run: |
           terraform init \
           -backend-config="access_key=${{ secrets.AZURE_BACKEND_KEY }}" 
-      
-      - name: Terraform Validate
-        id: validate1
-        run: terraform validate
-
-      - name: Terraform Plan
-        id: plan1
-        if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false
-        env:
-          VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }} 
 
       - name: Terraform Apply
         id: apply1
@@ -46,6 +35,16 @@ jobs:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
           # TF_LOG: debug 
 
+      - name: Terraform Output
+        id: output
+        run: |
+          output_value=$(terraform output -raw domain)
+          echo "TERRAFORM_OUTPUT_DOMAIN=$output_value" >> $GITHUB_ENV
+
+      - name: Wait For LB Creation
+        run: |  
+          sleep 120
+
       - name: Record Start Timestamp
         run: |
           echo "TF_VAR_timestamp_start=$(date +%s)" >> $GITHUB_ENV
@@ -53,27 +52,20 @@ jobs:
       - name: Run Application Tests
         run: |
           sleep 5
-            curl --location 'https://tesco-sentence.volt.archf5.com/api/sentence' \
+            curl --location 'https://$TERRAFORM_OUTPUT_DOMAIN/api/sentence' \
             --header 'Authorization: APIToken unkPPvEXl9Np1DJRR4UvQpK9DoI=' \
             --header 'Cookie: 3cac5=1668691945832-613485146; a5245=1691663394617-230291457; bcda5=1694434085538-116933348; c4295=1668693291780-467940678; a52403=WhfZxNqVqB3+Hdqr0Z7j9qyf9yCT7iupzf/NbPUXnMlC8QlkypjTodFTULQ+wayVeVmj4CJpYbH6JXVz5491ZhGd60jS8BorOVxNLjcRxPDiFDAnn+NSbYpV57NSRR6O/49MkfBY5syPeP0GW2H+Ndtde/E7Rzex/iOFib2jZC/4p7xv'
-            curl --location 'https://tesco-sentence.volt.archf5.com/api/backgrounds/6' \
+            curl --location 'https://$TERRAFORM_OUTPUT_DOMAIN/api/backgrounds/6' \
             --header 'Authorization: APIToken unkPPvEXl9Np1DJRR4UvQpK9DoI=' \
             --header 'Cookie: 3cac5=1668691945832-613485146; a5245=1691663394617-230291457; bcda5=1694434085538-116933348; c4295=1668693291780-467940678; a52403=WhfZxNqVqB3+Hdqr0Z7j9qyf9yCT7iupzf/NbPUXnMlC8QlkypjTodFTULQ+wayVeVmj4CJpYbH6JXVz5491ZhGd60jS8BorOVxNLjcRxPDiFDAnn+NSbYpV57NSRR6O/49MkfBY5syPeP0GW2H+Ndtde/E7Rzex/iOFib2jZC/4p7xv'
-            curl --location 'https://tesco-sentence.volt.archf5.com/images/nginx.png' \
+            curl --location 'https://$TERRAFORM_OUTPUT_DOMAIN/images/nginx.png' \
             --header 'Authorization: APIToken unkPPvEXl9Np1DJRR4UvQpK9DoI=' \
             --header 'Cookie: 3cac5=1668691945832-613485146; a5245=1691663394617-230291457; bcda5=1694434085538-116933348; c4295=1668693291780-467940678; a52403=WhfZxNqVqB3+Hdqr0Z7j9qyf9yCT7iupzf/NbPUXnMlC8QlkypjTodFTULQ+wayVeVmj4CJpYbH6JXVz5491ZhGd60jS8BorOVxNLjcRxPDiFDAnn+NSbYpV57NSRR6O/49MkfBY5syPeP0GW2H+Ndtde/E7Rzex/iOFib2jZC/4p7xv'
-            curl --location 'https://tesco-sentence.volt.archf5.com/images/f5.png' \
+            curl --location 'https://$TERRAFORM_OUTPUT_DOMAIN/images/f5.png' \
             --header 'Authorization: APIToken unkPPvEXl9Np1DJRR4UvQpK9DoI=' \
             --header 'Cookie: 3cac5=1668691945832-613485146; a5245=1691663394617-230291457; bcda5=1694434085538-116933348; c4295=1668693291780-467940678; a52403=WhfZxNqVqB3+Hdqr0Z7j9qyf9yCT7iupzf/NbPUXnMlC8QlkypjTodFTULQ+wayVeVmj4CJpYbH6JXVz5491ZhGd60jS8BorOVxNLjcRxPDiFDAnn+NSbYpV57NSRR6O/49MkfBY5syPeP0GW2H+Ndtde/E7Rzex/iOFib2jZC/4p7xv'        
           sleep 5
         continue-on-error: true
-
-      # Adding wait here because 10s between start/emd timestamp is no longer supported.  Needs to be longer.  Also need to allow time for events 
-      # to become available in elastic search
-
-      - name: Wait For Events Into DB
-        run: |  
-          sleep 61
 
       - name: Record End Timestamp
         run: |  
