@@ -36,10 +36,10 @@ jobs:
           # TF_LOG: debug 
 
       - name: Terraform Output
-        id: output
+        id: domain
         run: |
           output_value=$(terraform output -raw domain | tr -d '\n' | tr -d '%')
-          echo "TERRAFORM_OUTPUT=$output_value" >> $GITHUB_ENV
+          echo "TERRAFORM_OUTPUT=$output_value" >> $GITHUB_OUTPUT
 
       - name: Wait For LB Creation
         run: |  
@@ -52,16 +52,16 @@ jobs:
       - name: Run Application Tests
         run: |
           sleep 5
-            curl --location https://$TERRAFORM_OUTPUT/api/sentence \
+            curl --location https://${{steps.domain.outputs.login_server}}/api/sentence \
             --header 'Authorization: APIToken unkPPvEXl9Np1DJRR4UvQpK9DoI=' \
             --header 'Cookie: 3cac5=1668691945832-613485146; a5245=1691663394617-230291457; bcda5=1694434085538-116933348; c4295=1668693291780-467940678; a52403=WhfZxNqVqB3+Hdqr0Z7j9qyf9yCT7iupzf/NbPUXnMlC8QlkypjTodFTULQ+wayVeVmj4CJpYbH6JXVz5491ZhGd60jS8BorOVxNLjcRxPDiFDAnn+NSbYpV57NSRR6O/49MkfBY5syPeP0GW2H+Ndtde/E7Rzex/iOFib2jZC/4p7xv'
-            curl --location https://$TERRAFORM_OUTPUT/api/backgrounds/6 \
+            curl --location https://${{steps.domain.outputs.login_server}}/api/backgrounds/6 \
             --header 'Authorization: APIToken unkPPvEXl9Np1DJRR4UvQpK9DoI=' \
             --header 'Cookie: 3cac5=1668691945832-613485146; a5245=1691663394617-230291457; bcda5=1694434085538-116933348; c4295=1668693291780-467940678; a52403=WhfZxNqVqB3+Hdqr0Z7j9qyf9yCT7iupzf/NbPUXnMlC8QlkypjTodFTULQ+wayVeVmj4CJpYbH6JXVz5491ZhGd60jS8BorOVxNLjcRxPDiFDAnn+NSbYpV57NSRR6O/49MkfBY5syPeP0GW2H+Ndtde/E7Rzex/iOFib2jZC/4p7xv'
-            curl --location https://$TERRAFORM_OUTPUT/images/nginx.png \
+            curl --location https://${{steps.domain.outputs.login_server}}/images/nginx.png \
             --header 'Authorization: APIToken unkPPvEXl9Np1DJRR4UvQpK9DoI=' \
             --header 'Cookie: 3cac5=1668691945832-613485146; a5245=1691663394617-230291457; bcda5=1694434085538-116933348; c4295=1668693291780-467940678; a52403=WhfZxNqVqB3+Hdqr0Z7j9qyf9yCT7iupzf/NbPUXnMlC8QlkypjTodFTULQ+wayVeVmj4CJpYbH6JXVz5491ZhGd60jS8BorOVxNLjcRxPDiFDAnn+NSbYpV57NSRR6O/49MkfBY5syPeP0GW2H+Ndtde/E7Rzex/iOFib2jZC/4p7xv'
-            curl --location https://$TERRAFORM_OUTPUT/images/f5.png \
+            curl --location https://${{steps.domain.outputs.login_server}}/images/f5.png \
             --header 'Authorization: APIToken unkPPvEXl9Np1DJRR4UvQpK9DoI=' \
             --header 'Cookie: 3cac5=1668691945832-613485146; a5245=1691663394617-230291457; bcda5=1694434085538-116933348; c4295=1668693291780-467940678; a52403=WhfZxNqVqB3+Hdqr0Z7j9qyf9yCT7iupzf/NbPUXnMlC8QlkypjTodFTULQ+wayVeVmj4CJpYbH6JXVz5491ZhGd60jS8BorOVxNLjcRxPDiFDAnn+NSbYpV57NSRR6O/49MkfBY5syPeP0GW2H+Ndtde/E7Rzex/iOFib2jZC/4p7xv'        
           sleep 5
