@@ -15,16 +15,21 @@ Note that the terraform state is stored in an Azure Storage Account.  The key fo
 
 - 1. clone the repo
 - 2. update the `vars.auto-tfvars` file to suit your environment
-- 3. initate the create workflow:
+    - `api_p12_file` should point to the F5 Distributed Cloud credential (.p12 certificate)
+- 3. Modify the `backend "azurerm"` configuration in `main.tf`
+- 4. In your GitHub repo, go to `Settings`>`Security`>`Secrets and variables`>`Actions` and create two `Repository Secrets`:
+    - `AZURE_BACKEND_KEY` containing the key value to access the Azure Storage backend (the one defined in `main.tf`)
+    - `VES_P12_PASSWORD` containing the passphrase for the F5 Distributed Cloud credential (.p12 certificate)
+- 5. initate the create workflow:
     - `git branch dev`
     - `git checkout dev`
     - make a code change (e.g. change the filename `lb_origin.tf.delete` to `lb_origin.tf`)
     - `git add .`
     - `git commit -m "my message"`
     - `git push`   
-- 4. In the Github UI, create a Pull Request to merge `Dev` into `main`
+- 6. In the Github UI, create a Pull Request to merge `Dev` into `main`
     - The `terrafom-plan.yml` Github Actions workflow will run and output the plan.
-- 5. Complete the merge, which triggers the `terrafom-apply.yml` Github Actions workflow to run
+- 7. Complete the merge, which triggers the `terrafom-apply.yml` Github Actions workflow to run
         - Terraform will create the LB and Origin
 
 ## How to delete the configuration (LB and Origin)
