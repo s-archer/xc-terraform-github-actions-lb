@@ -5,8 +5,8 @@ tenant       = "f5-emea-ent"
 namespace    = "s-archer"
 
 # F5 Distributed Cloud LB Details - Per App
-domain                  = "oslo-sentence.volt.archf5.com"
-shortname               = "oslo-sentence"
+domain                  = "swe-sentence.volt.archf5.com"
+shortname               = "swe-sentence"
 origin_k8s_service_name = "sentence-frontend.api"
 origin_fqdn             = ""
 origin_ip               = ""
