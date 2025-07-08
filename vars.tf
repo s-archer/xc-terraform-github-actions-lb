@@ -1,58 +1,71 @@
 locals {
-  api_url = format("https://%s.%s/api", var.tenant, var.console_url)
+  f5xc_api_url = format("https://%s.console.ves.volterra.io/api", var.f5xc_tenant)
 }
 
-variable "console_url" {
-  type    = string
-  default = ""
+locals {
+  f5xc_object_name = format("%s-%s", var.f5xc_prefix, var.f5xc_suffix)
 }
 
-variable "tenant" {
+variable "f5xc_api_p12_file" {
   type = string
 }
 
-variable "api_p12_file" {
+variable "f5xc_tenant" {
   type = string
 }
 
-variable "namespace" {
+variable "f5xc_namespace" {
   type = string
 }
 
-variable "shortname" {
+variable "f5xc_tenant_full" {
   type = string
 }
 
-variable "origin_port" {
+variable "f5xc_lb_domains" {
   type = string
 }
 
-variable "origin_ip" {
+variable "f5xc_cert" {
   type = string
 }
 
-variable "origin_site" {
+variable "f5xc_prefix" {
   type = string
 }
 
-variable "origin_fqdn" {
+variable "f5xc_suffix" {
   type = string
 }
 
-variable "origin_k8s_service_name" {
+variable "f5xc_origin_fqdns" {
+  type = list(string)
+}
+
+variable "f5xc_origin_discovery" {
+  type = list(string)
+}
+
+variable "f5xc_origin-healthcheck-path" {
   type = string
 }
 
-variable "domain" {
+variable "f5xc_origin_ips" {
+  type = list(string)
+}
+
+variable "f5xc_origin_port" {
   type = string
 }
 
-variable "timestamp_start" {
-  type    = string
-  default = ""
+variable "f5xc_cloud" {
+  type = string
 }
 
-variable "timestamp_end" {
-  type    = string
-  default = ""
+variable "f5xc_swagger_filename" {
+  type = string
+}
+
+variable "f5xc_swagger_format" {
+  type = string
 }
