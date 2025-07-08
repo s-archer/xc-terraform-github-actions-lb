@@ -1,0 +1,3499 @@
+{
+  "components": {
+    "securitySchemes": {
+      "jwtBearerAuth": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "description": "",
+    "title": "juice-shop APIs",
+    "version": "v1"
+  },
+  "openapi": "3.0.3",
+  "security": [{"jwtBearerAuth": []}],
+  "paths": {
+    "/api/Addresss": {
+      "get": {
+        "description": "get addresses",
+        "responses": {
+          "2XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "add address",
+        "parameters": [
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "cache-control",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Integer",
+            "in": "header",
+            "name": "content-length",
+            "schema": {
+              "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "postman-token",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "city": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "fullName": {
+                    "type": "string"
+                  },
+                  "mobileNum": {
+                    "type": "integer"
+                  },
+                  "state": {
+                    "description": "Number",
+                    "pattern": "^(?:[-+]?(?:[0-9]+))?(?:\\.[0-9]*)?(?:[eE][+-]?(?:[0-9]+))?$",
+                    "type": "string"
+                  },
+                  "streetAddress": {
+                    "type": "string"
+                  },
+                  "zipCode": {
+                    "description": "Integer",
+                    "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "fullName",
+                  "mobileNum",
+                  "city",
+                  "zipCode",
+                  "state",
+                  "streetAddress",
+                  "country"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "UserId": {
+                          "type": "integer"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "fullName": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "integer"
+                        },
+                        "mobileNum": {
+                          "type": "integer"
+                        },
+                        "state": {
+                          "description": "Number",
+                          "pattern": "^(?:[-+]?(?:[0-9]+))?(?:\\.[0-9]*)?(?:[eE][+-]?(?:[0-9]+))?$",
+                          "type": "string"
+                        },
+                        "streetAddress": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "zipCode": {
+                          "description": "Integer",
+                          "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "UserId",
+                        "createdAt",
+                        "fullName",
+                        "mobileNum",
+                        "city",
+                        "zipCode",
+                        "id",
+                        "state",
+                        "streetAddress",
+                        "country",
+                        "updatedAt"
+                      ],
+                      "type": "object"
+                    },
+                    "status": {
+                      "description": "Word",
+                      "pattern": "^[A-Za-z0-9-_]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "location": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Addresss/{id}": {
+      "get": {
+        "description": "get address",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "2XX": {
+            "description": ""
+          },
+          "3XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/BasketItems/": {
+      "post": {
+        "description": "add item to basket",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Integer",
+            "in": "header",
+            "name": "content-length",
+            "schema": {
+              "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Url",
+            "in": "header",
+            "name": "origin",
+            "schema": {
+              "pattern": "((https?|ftp|file|sftp|git|s3|ldap|ldaps|sip|h323|ws|wss|rsync|smb|chrome|imap|pop|ssh|telnet):\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "BasketId": {
+                    "description": "Integer",
+                    "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                    "type": "string"
+                  },
+                  "ProductId": {
+                    "type": "integer"
+                  },
+                  "quantity": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "quantity",
+                  "BasketId",
+                  "ProductId"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": ""
+          },
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "BasketId": {
+                          "description": "Integer",
+                          "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                          "type": "string"
+                        },
+                        "ProductId": {
+                          "type": "integer"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "integer"
+                        },
+                        "quantity": {
+                          "type": "integer"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "BasketId",
+                        "ProductId",
+                        "createdAt",
+                        "id",
+                        "quantity",
+                        "updatedAt"
+                      ],
+                      "type": "object"
+                    },
+                    "status": {
+                      "description": "Word",
+                      "pattern": "^[A-Za-z0-9-_]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/BasketItems/{id}": {
+      "get": {
+        "description": "get basket item",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Cards": {
+      "get": {
+        "description": "get payment cards",
+        "parameters": [
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "postman-token",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "cache-control",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "UserId": {
+                            "type": "integer"
+                          },
+                          "cardNum": {
+                            "type": "string"
+                          },
+                          "expMonth": {
+                            "type": "integer"
+                          },
+                          "expYear": {
+                            "type": "integer"
+                          },
+                          "fullName": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "cardNum",
+                          "UserId",
+                          "fullName",
+                          "id",
+                          "expYear",
+                          "expMonth"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "status": {
+                      "description": "Word",
+                      "pattern": "^[A-Za-z0-9-_]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "add payment card",
+        "responses": {
+          "401": {
+            "description": ""
+          },
+          "2XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Cards/{id}": {
+      "get": {
+        "description": "get payment card",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "2XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Challenges/": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "x-f5-request-id",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "if-none-match",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "cookie",
+            "name": "cookieconsent_status",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "cookie",
+            "name": "continueCode",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "cookie",
+            "name": "welcomebanner_status",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "cookie",
+            "name": "30c05",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "cookie",
+            "name": "language",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "cookie",
+            "name": "_imp_di_pc_",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "cookie",
+            "name": "30c003",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "3XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Deliverys": {
+      "get": {
+        "description": "get delivery options",
+        "security": [],
+        "parameters": [
+          {
+            "in": "cookie",
+            "name": "token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "3XX": {
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Deliverys/{id}": {
+      "get": {
+        "description": "get delivery",
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-language",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "3XX": {
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Feedbacks/": {
+      "post": {
+        "description": "add feedback",
+        "security": [],
+        "responses": {
+          "2XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Products/{id}": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "d",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": ""
+          },
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "deletedAt": {
+                          "nullable": true,
+                          "type": "object"
+                        },
+                        "deluxePrice": {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "integer"
+                            }
+                          ]
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "integer"
+                        },
+                        "image": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "integer"
+                            }
+                          ]
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "description",
+                        "deletedAt",
+                        "createdAt",
+                        "id",
+                        "price",
+                        "deluxePrice",
+                        "image",
+                        "updatedAt"
+                      ],
+                      "type": "object"
+                    },
+                    "status": {
+                      "description": "Word",
+                      "pattern": "^[A-Za-z0-9-_]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Quantitys/": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "ProductId": {
+                            "type": "integer"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "limitPerUser": {
+                            "anyOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "nullable": true,
+                                "type": "object"
+                              }
+                            ]
+                          },
+                          "quantity": {
+                            "type": "integer"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "ProductId",
+                          "createdAt",
+                          "id",
+                          "limitPerUser",
+                          "quantity",
+                          "updatedAt"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "status": {
+                      "description": "Word",
+                      "pattern": "^[A-Za-z0-9-_]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-encoding": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "3XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Users/": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "cache-control",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "postman-token",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "deletedAt": {
+                            "nullable": true,
+                            "type": "object"
+                          },
+                          "deluxeToken": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "isActive": {
+                            "type": "boolean"
+                          },
+                          "lastLoginIp": {
+                            "type": "string"
+                          },
+                          "profileImage": {
+                            "type": "string"
+                          },
+                          "role": {
+                            "description": "Word",
+                            "pattern": "^[A-Za-z0-9-_]+$",
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "username": {
+                            "description": "Credentials",
+                            "type": "string",
+                            "x-pii": {}
+                          }
+                        },
+                        "required": [
+                          "deluxeToken",
+                          "deletedAt",
+                          "email",
+                          "createdAt",
+                          "profileImage",
+                          "id",
+                          "role",
+                          "username",
+                          "isActive",
+                          "lastLoginIp",
+                          "updatedAt"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "status": {
+                      "description": "Word",
+                      "pattern": "^[A-Za-z0-9-_]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-encoding": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "Swagger auto-generated from learnt schema",
+        "responses": {
+          "2XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/basket/{id}": {
+      "get": {
+        "description": "get basket",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": ""
+          },
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "Products": {
+                          "items": {
+                            "properties": {
+                              "BasketItem": {
+                                "properties": {
+                                  "BasketId": {
+                                    "type": "integer"
+                                  },
+                                  "ProductId": {
+                                    "type": "integer"
+                                  },
+                                  "createdAt": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "quantity": {
+                                    "type": "integer"
+                                  },
+                                  "updatedAt": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "BasketId",
+                                  "ProductId",
+                                  "createdAt",
+                                  "id",
+                                  "quantity",
+                                  "updatedAt"
+                                ],
+                                "type": "object"
+                              },
+                              "createdAt": {
+                                "type": "string"
+                              },
+                              "deletedAt": {
+                                "nullable": true,
+                                "type": "object"
+                              },
+                              "deluxePrice": {
+                                "anyOf": [
+                                  {
+                                    "type": "number"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "integer"
+                              },
+                              "image": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "price": {
+                                "anyOf": [
+                                  {
+                                    "type": "number"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              },
+                              "updatedAt": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "description",
+                              "deletedAt",
+                              "createdAt",
+                              "BasketItem",
+                              "id",
+                              "price",
+                              "deluxePrice",
+                              "image",
+                              "updatedAt"
+                            ],
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "UserId": {
+                          "type": "integer"
+                        },
+                        "coupon": {
+                          "nullable": true,
+                          "type": "object"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "integer"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "Products",
+                        "UserId",
+                        "coupon",
+                        "createdAt",
+                        "id",
+                        "updatedAt"
+                      ],
+                      "type": "object"
+                    },
+                    "status": {
+                      "description": "Word",
+                      "pattern": "^[A-Za-z0-9-_]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-encoding": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "3XX": {
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/basket/{id}/checkout": {
+      "post": {
+        "description": "checkout basket",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Integer",
+            "in": "header",
+            "name": "content-length",
+            "schema": {
+              "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Url",
+            "in": "header",
+            "name": "origin",
+            "schema": {
+              "pattern": "((https?|ftp|file|sftp|git|s3|ldap|ldaps|sip|h323|ws|wss|rsync|smb|chrome|imap|pop|ssh|telnet):\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "couponData": {
+                    "type": "string"
+                  },
+                  "orderDetails": {
+                    "properties": {
+                      "addressId": {
+                        "description": "Integer",
+                        "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                        "type": "string"
+                      },
+                      "deliveryMethodId": {
+                        "description": "Integer",
+                        "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                        "type": "string"
+                      },
+                      "paymentId": {
+                        "description": "Integer",
+                        "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "addressId",
+                      "paymentId",
+                      "deliveryMethodId"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "orderDetails",
+                  "couponData"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": ""
+          },
+          "500": {
+            "description": ""
+          },
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "orderConfirmation": {
+                      "description": "Word",
+                      "pattern": "^[A-Za-z0-9-_]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "orderConfirmation"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/captcha/": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "security": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "accept-language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "if-none-match",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "x-f5-request-id",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "cookie",
+            "name": "30c003",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "cookie",
+            "name": "cookieconsent_status",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "cookie",
+            "name": "continueCode",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "cookie",
+            "name": "welcomebanner_status",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "cookie",
+            "name": "30c05",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "cookie",
+            "name": "language",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "cookie",
+            "name": "_imp_di_pc_",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "answer": {
+                      "description": "Integer",
+                      "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                      "type": "string"
+                    },
+                    "captcha": {
+                      "type": "string"
+                    },
+                    "captchaId": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "captcha",
+                    "captchaId",
+                    "answer"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/languages": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "security": [],
+        "responses": {
+          "3XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/order-history": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "cache-control",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "postman-token",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {},
+                      "type": "array"
+                    },
+                    "status": {
+                      "description": "Word",
+                      "pattern": "^[A-Za-z0-9-_]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/products/{id}": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "deletedAt": {
+                            "nullable": true,
+                            "type": "object"
+                          },
+                          "deluxePrice": {
+                            "anyOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "image": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "anyOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "description",
+                          "deletedAt",
+                          "createdAt",
+                          "id",
+                          "price",
+                          "deluxePrice",
+                          "image",
+                          "updatedAt"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "status": {
+                      "description": "Word",
+                      "pattern": "^[A-Za-z0-9-_]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-encoding": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "3XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/products/{id}/reviews": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "cache-control",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "postman-token",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "cookie",
+            "name": "token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "properties": {
+                          "_id": {
+                            "description": "Word",
+                            "pattern": "^[A-Za-z0-9-_]+$",
+                            "type": "string"
+                          },
+                          "author": {
+                            "description": "Email",
+                            "pattern": "^[A-Za-z0-9!#$%&'+\\/=?^_`{|}~-]{1,64}(\\.[A-Za-z0-9!#$%&'+\\/=?^_`{|}~-]{1,64})*@[A-Za-z0-9-]{1,64}\\.[A-Za-z0-9-]{1,64}$",
+                            "type": "string",
+                            "x-pii": {}
+                          },
+                          "liked": {
+                            "type": "boolean"
+                          },
+                          "likedBy": {
+                            "items": {},
+                            "type": "array"
+                          },
+                          "likesCount": {
+                            "type": "integer"
+                          },
+                          "message": {
+                            "description": "Word",
+                            "pattern": "^[A-Za-z0-9-_]+$",
+                            "type": "string"
+                          },
+                          "product": {
+                            "description": "Integer",
+                            "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "likesCount",
+                          "product",
+                          "liked",
+                          "likedBy",
+                          "message",
+                          "_id",
+                          "author"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "status": {
+                      "description": "Word",
+                      "pattern": "^[A-Za-z0-9-_]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "3XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "Swagger auto-generated from learnt schema",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "pragma",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-language",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "author": {
+                    "description": "Email",
+                    "pattern": "^[A-Za-z0-9!#$%&'+\\/=?^_`{|}~-]{1,64}(\\.[A-Za-z0-9!#$%&'+\\/=?^_`{|}~-]{1,64})*@[A-Za-z0-9-]{1,64}\\.[A-Za-z0-9-]{1,64}$",
+                    "type": "string",
+                    "x-pii": {}
+                  },
+                  "message": {
+                    "description": "Word",
+                    "pattern": "^[A-Za-z0-9-_]+$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "author",
+                  "message"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "description": "Word",
+                      "pattern": "^[A-Za-z0-9-_]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/saveLoginIp": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "cache-control",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Word",
+            "in": "header",
+            "name": "postman-token",
+            "schema": {
+              "pattern": "^[A-Za-z0-9-_]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": ""
+          },
+          "2XX": {
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/track-order/{id}": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "description": ""
+          },
+          "3XX": {
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/user/login": {
+      "post": {
+        "description": "Swagger auto-generated from learnt schema",
+        "responses": {
+          "2XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/user/whoami": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "accept-language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "503": {
+            "description": ""
+          },
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "user": {
+                      "properties": {
+                        "email": {
+                          "description": "Email",
+                          "pattern": "^[A-Za-z0-9!#$%&'+\\/=?^_`{|}~-]{1,64}(\\.[A-Za-z0-9!#$%&'+\\/=?^_`{|}~-]{1,64})*@[A-Za-z0-9-]{1,64}\\.[A-Za-z0-9-]{1,64}$",
+                          "type": "string",
+                          "x-pii": {}
+                        },
+                        "id": {
+                          "type": "integer"
+                        },
+                        "lastLoginIp": {
+                          "description": "IPv4 Address",
+                          "pattern": "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)",
+                          "type": "string",
+                          "x-pii": {}
+                        },
+                        "profileImage": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "email",
+                        "id",
+                        "profileImage",
+                        "lastLoginIp"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "user"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "3XX": {
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/wallet/balance": {
+      "get": {
+        "description": "Swagger auto-generated from learnt schema",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "accept-language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "accept-encoding",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "description": "",
+            "headers": {
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "content-length": {
+                "description": "Integer",
+                "schema": {
+                  "pattern": "^(?:[-+]?(?:0|[1-9][0-9]*))$",
+                  "type": "string"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "date": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "feature-policy": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "vary": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "via": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-frame-options": {
+                "description": "Word",
+                "schema": {
+                  "pattern": "^[A-Za-z0-9-_]+$",
+                  "type": "string"
+                }
+              },
+              "x-recruiting": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "3XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "Swagger auto-generated from learnt schema",
+        "responses": {
+          "2XX": {
+            "description": ""
+          },
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  }
+}
