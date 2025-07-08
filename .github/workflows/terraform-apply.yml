@@ -1,8 +1,10 @@
-name: "Terraform Pipeline v1.37"
+name: "Terraform Apply Pipeline v1"
 on:
   push:
     branches:
       - main
+  # The following command allows manual triggering of the workflow
+  workflow_dispatch:
 
 jobs:
  

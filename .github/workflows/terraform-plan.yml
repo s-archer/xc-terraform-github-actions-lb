@@ -1,4 +1,4 @@
-name: "Terraform Pipeline v1.37"
+name: "Terraform Plan Pipeline v1"
 on:
   pull_request:
 
