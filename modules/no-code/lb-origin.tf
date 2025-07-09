@@ -254,7 +254,7 @@ resource "volterra_http_loadbalancer" "colors" {
         network = "SITE_NETWORK_INSIDE"
         site {
           namespace = "system"
-          name      = "arch-tf-azure-aks-site-428b"
+          name      = var.cloud_map[var.f5xc_cloud]
         }
       }
     }
