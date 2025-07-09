@@ -41,4 +41,4 @@ f5xc_origin-healthcheck-path = "/"
 #   aws
 #   azure
 #
-f5xc_cloud = "aws"
+f5xc_cloud = "azure"
