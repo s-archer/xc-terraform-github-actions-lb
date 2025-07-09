@@ -237,7 +237,7 @@ resource "volterra_user_identification" "recommended" {
 #  This is for the colors microservice
 
 resource "volterra_http_loadbalancer" "colors" {
-  name        = "sentence-colors"
+  name        = "sentence-colors-nocode"
   namespace   = var.f5xc_namespace
   description = "Colours microservice designed to decorate a sentence"
   domains     = ["sentence-colors.azure-aks"]
@@ -269,7 +269,7 @@ resource "volterra_http_loadbalancer" "colors" {
 }
 
 resource "volterra_origin_pool" "colors" {
-  name                   = "sentence-colors"
+  name                   = "sentence-colors-nocode"
   namespace              = var.f5xc_namespace
   description            = "Colours microservice designed to decorate a sentence"
   endpoint_selection     = "LOCAL_PREFERRED"
