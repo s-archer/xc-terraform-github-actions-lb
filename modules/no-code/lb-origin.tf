@@ -233,3 +233,63 @@ resource "volterra_user_identification" "recommended" {
     ip_and_ja4_tls_fingerprint = true
   }
 }
+
+#  This is for the colors microservice
+
+resource "volterra_http_loadbalancer" "colors" {
+  name        = "sentence-colors"
+  namespace   = var.f5xc_namespace
+  description = "Colours microservice designed to decorate a sentence"
+  domains     = "sentence-colors.azure-aks"
+  #domains     = ["sentence-colors.api"]
+  
+  http {
+    dns_volterra_managed = false
+    port                 = "80"
+  }
+
+  advertise_custom {
+    advertise_where {
+      site {
+        network = "SITE_NETWORK_INSIDE"
+        site {
+          namespace = "system"
+          name      = "arch-tf-azure-aks-site-428b"
+        }
+      }
+    }
+  }
+
+  default_route_pools {
+    pool {
+      namespace = var.f5xc_namespace
+      name      = volterra_origin_pool.colors.name
+    }
+  }
+}
+
+resource "volterra_origin_pool" "colors" {
+  name                   = "sentence-colors"
+  namespace              = var.f5xc_namespace
+  description            = "Colours microservice designed to decorate a sentence"
+  endpoint_selection     = "LOCAL_PREFERRED"
+  loadbalancer_algorithm = "LB_OVERRIDE"
+  port                   = 80
+  no_tls                 = true
+
+  origin_servers {
+
+    k8s_service {
+      service_name   = "sentence-colors.aws-eks"
+      inside_network = true
+
+      site_locator {
+
+        site {
+          namespace = "system"
+          name      = "arch-smsv1-aws-eks-site"
+        }
+      }
+    }
+  }
+}
