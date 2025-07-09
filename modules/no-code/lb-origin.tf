@@ -240,7 +240,7 @@ resource "volterra_http_loadbalancer" "colors" {
   name        = "sentence-colors"
   namespace   = var.f5xc_namespace
   description = "Colours microservice designed to decorate a sentence"
-  domains     = "sentence-colors.azure-aks"
+  domains     = ["sentence-colors.azure-aks"]
   #domains     = ["sentence-colors.api"]
   
   http {
