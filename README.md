@@ -1,9 +1,13 @@
 # F5 Distributed Cloud, Terraform, Github Actions Workflow
 
-This project provides an example CI/CD pipeline Load-Balancer deployment using F5 Distributed Cloud.  For a functioning sentence application, please deploy the two following terraform configurations that together create an MCN demo application that spans two sites.  The app is deployed as containers inside AWS EKS and Azure AKS:
+This project provides an example CI/CD pipeline Load-Balancer (LB) deployment using F5 Distributed Cloud.
 
-- https://github.com/s-archer/volterra-quickdemos/tree/main/azure_site_aks_sentence
-- https://github.com/s-archer/volterra-quickdemos/tree/main/aws_site_eks_colors
+- Firstly a load-balancer with all security controls enabled, including API security with swagger definition.
+- Secondly, an internal LB for the Sentence App that exposes the color microservice from AWS into Azure. 
+    - For a functioning sentence application, please deploy the two following terraform configurations that together create an MCN demo application that spans two sites.  The app is deployed as containers inside AWS EKS and Azure AKS:
+        - https://github.com/s-archer/volterra-quickdemos/tree/main/azure_site_aks_sentence
+        - https://github.com/s-archer/volterra-quickdemos/tree/main/aws_site_eks_colors
+    - Ensure that f5xc_cloud variable is set to `azure`, os that colors is exposed into Azure
 
 Note that the terraform state is stored in an Azure Storage Account.  The key for the account (and the passphrase for the automation certificate) are stored as 'Actions' Secrets in the Github Repo.
 
