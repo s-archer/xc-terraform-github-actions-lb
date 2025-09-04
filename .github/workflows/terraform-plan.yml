@@ -33,7 +33,7 @@ jobs:
         env:
           VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }} 
 
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v8
         if: github.event_name == 'pull_request'
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
