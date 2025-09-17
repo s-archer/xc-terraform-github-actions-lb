@@ -19,7 +19,7 @@ f5xc_cert       = "arch-nocode-f5xc-co-uk"
 
 # If using an API swagger file, upload into the terraform root folder (same folder as this 
 #  readme) and add the name of the file here.  And set fromat to either "json" or "yaml".
-f5xc_swagger_filename = "swagger-juice-v1.json"
+f5xc_swagger_filename = "swagger-juice-v3.json"
 f5xc_swagger_format   = "json"
 
 # Configure the upstream target origin servers (and port), where we will send  

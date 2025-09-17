@@ -1,6 +1,6 @@
 variable "cloud_map" {
   default = {
-    azure = "arch-tf-azure-aks-site-428b"
+    azure = "arch-azure-smsv2-vt-prov-site-cc60-node-0"
     aws   = "arch-smsv1-aws-eks-site"
   }
 }

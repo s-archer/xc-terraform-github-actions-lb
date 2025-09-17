@@ -63,13 +63,47 @@ resource "volterra_http_loadbalancer" "lb" {
       namespace = var.f5xc_namespace
       name      = volterra_api_definition.api-def.name
     }
-    validation_disabled = true
+
+    validation_all_spec_endpoints {
+      fall_through_mode { 
+        fall_through_mode_allow = true
+      }
+      validation_mode {
+        validation_mode_active {
+          enforcement_block = true
+          request_validation_properties = [
+            "PROPERTY_PATH_PARAMETERS",
+            "PROPERTY_QUERY_PARAMETERS",
+            "PROPERTY_HTTP_HEADERS"
+          ]
+        }
+      }
+      settings {
+        oversized_body_skip_validation = true
+        property_validation_settings_default = true        
+      }   
+    }
   }
 
   enable_api_discovery {
     disable_learn_from_redirect_traffic = true
     discovered_api_settings {
       purge_duration_for_inactive_discovered_apis = "2"
+    }
+    api_crawler {
+      api_crawler_config {
+        domains {
+          domain = "nocode.f5xc.co.uk"
+          simple_login {
+            user = "user123"
+            password {
+              clear_secret_info {
+                url = "string:///dGVzdDEyMw=="
+              }
+            }
+          }
+        }
+      }
     }
   }
 
