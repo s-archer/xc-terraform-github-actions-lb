@@ -8,17 +8,28 @@ resource "volterra_http_loadbalancer" "lb" {
   enable_threat_mesh              = true
   add_location                    = true
 
-  https {
-    port          = 443
-    http_redirect = true
-    add_hsts      = true
+  # https {
+  #   port          = 443
+  #   http_redirect = true
+  #   add_hsts      = true
 
-    tls_cert_params {
-      no_mtls = true
-      certificates {
-        name      = var.f5xc_cert
-        namespace = var.f5xc_namespace
-      }
+  #   tls_cert_params {
+  #     no_mtls = true
+  #     certificates {
+  #       name      = var.f5xc_cert
+  #       namespace = var.f5xc_namespace
+  #     }
+  #   }
+  # }
+  https_auto_cert {
+    add_hsts               = false
+    http_redirect          = true
+    no_mtls                = true
+    default_header         = true
+    disable_path_normalize = true
+
+    tls_config {
+      default_security = true
     }
   }
 
