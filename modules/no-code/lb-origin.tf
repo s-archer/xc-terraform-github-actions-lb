@@ -124,17 +124,17 @@ resource "volterra_http_loadbalancer" "lb" {
     }
   }
 
-  advertise_custom {
-    advertise_where {
-      site {
-        network = "SITE_NETWORK_INSIDE"
-        site {
-          name      = var.cloud_map[var.f5xc_cloud]
-          namespace = "system"
-        }
-      }
-    }
-  }
+  # advertise_custom {
+  #   advertise_where {
+  #     site {
+  #       network = "SITE_NETWORK_INSIDE"
+  #       site {
+  #         name      = var.cloud_map[var.f5xc_cloud]
+  #         namespace = "system"
+  #       }
+  #     }
+  #   }
+  # }
 
   lifecycle {
     ignore_changes = [
