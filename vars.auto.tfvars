@@ -1,6 +1,6 @@
 # Choose a unique prefix/suffix for object names (suggest a short version of application name)
 f5xc_prefix = "arch"
-f5xc_suffix = "nocode-example-1"
+f5xc_suffix = "nocode-example"
 
 # F5 Distributed Cloud LB Details - Per App
 # Configure the LB name, the domain the LB will listen on (match Host header) 
