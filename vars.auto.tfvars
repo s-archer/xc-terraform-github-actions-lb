@@ -20,7 +20,7 @@ f5xc_swagger_format   = "json"
 #  combination of all three.  If not required, leave the relevant list empty.
 f5xc_origin_fqdns     = []
 f5xc_origin_discovery = []
-f5xc_origin_ips       = ["10.1.221.249", "10.2.231.100"]
+f5xc_origin_ips       = ["10.0.103.114", "10.0.103.36"]
 
 f5xc_origin_port = 443
 
@@ -33,7 +33,7 @@ f5xc_origin-healthcheck-path = "/"
 #   aws
 #   azure
 #
-f5xc_cloud = "azure"
+f5xc_cloud = "aws"
 
 # F5 Distributed Cloud Tenant Details
 # You will need to login to F5 XC Distributed Cloud to obtain an API certificate p12
