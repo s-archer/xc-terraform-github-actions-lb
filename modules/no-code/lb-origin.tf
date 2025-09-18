@@ -22,11 +22,9 @@ resource "volterra_http_loadbalancer" "lb" {
   #   }
   # }
   https_auto_cert {
-    add_hsts               = false
-    http_redirect          = true
-    no_mtls                = true
-    default_header         = true
-    disable_path_normalize = true
+    port          = 443
+    add_hsts      = true
+    http_redirect = true
 
     tls_config {
       default_security = true
