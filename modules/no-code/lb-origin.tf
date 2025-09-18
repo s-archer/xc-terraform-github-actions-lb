@@ -270,60 +270,60 @@ resource "volterra_user_identification" "recommended" {
 
 #  This is for the colors microservice
 
-resource "volterra_http_loadbalancer" "colors" {
-  name        = "sentence-colors-nocode"
-  namespace   = var.f5xc_namespace
-  description = "Colours microservice designed to decorate a sentence"
-  domains     = ["sentence-colors.azure-aks"]
-  #domains     = ["sentence-colors.api"]
+# resource "volterra_http_loadbalancer" "colors" {
+#   name        = "sentence-colors-nocode"
+#   namespace   = var.f5xc_namespace
+#   description = "Colours microservice designed to decorate a sentence"
+#   domains     = ["sentence-colors.azure-aks"]
+#   #domains     = ["sentence-colors.api"]
   
-  http {
-    dns_volterra_managed = false
-    port                 = "80"
-  }
+#   http {
+#     dns_volterra_managed = false
+#     port                 = "80"
+#   }
 
-  advertise_custom {
-    advertise_where {
-      site {
-        network = "SITE_NETWORK_INSIDE"
-        site {
-          namespace = "system"
-          name      = var.cloud_map[var.f5xc_cloud]
-        }
-      }
-    }
-  }
+#   advertise_custom {
+#     advertise_where {
+#       site {
+#         network = "SITE_NETWORK_INSIDE"
+#         site {
+#           namespace = "system"
+#           name      = var.cloud_map[var.f5xc_cloud]
+#         }
+#       }
+#     }
+#   }
 
-  default_route_pools {
-    pool {
-      namespace = var.f5xc_namespace
-      name      = volterra_origin_pool.colors.name
-    }
-  }
-}
+#   default_route_pools {
+#     pool {
+#       namespace = var.f5xc_namespace
+#       name      = volterra_origin_pool.colors.name
+#     }
+#   }
+# }
 
-resource "volterra_origin_pool" "colors" {
-  name                   = "sentence-colors-nocode"
-  namespace              = var.f5xc_namespace
-  description            = "Colours microservice designed to decorate a sentence"
-  endpoint_selection     = "LOCAL_PREFERRED"
-  loadbalancer_algorithm = "LB_OVERRIDE"
-  port                   = 80
-  no_tls                 = true
+# resource "volterra_origin_pool" "colors" {
+#   name                   = "sentence-colors-nocode"
+#   namespace              = var.f5xc_namespace
+#   description            = "Colours microservice designed to decorate a sentence"
+#   endpoint_selection     = "LOCAL_PREFERRED"
+#   loadbalancer_algorithm = "LB_OVERRIDE"
+#   port                   = 80
+#   no_tls                 = true
 
-  origin_servers {
+#   origin_servers {
 
-    k8s_service {
-      service_name   = "sentence-colors.aws-eks"
-      inside_network = true
+#     k8s_service {
+#       service_name   = "sentence-colors.aws-eks"
+#       inside_network = true
 
-      site_locator {
+#       site_locator {
 
-        site {
-          namespace = "system"
-          name      = "arch-smsv1-aws-eks-site"
-        }
-      }
-    }
-  }
-}
+#         site {
+#           namespace = "system"
+#           name      = "arch-smsv1-aws-eks-site"
+#         }
+#       }
+#     }
+#   }
+# }
