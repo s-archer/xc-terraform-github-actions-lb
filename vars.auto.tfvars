@@ -1,11 +1,3 @@
-# F5 Distributed Cloud Tenant Details
-# You will need to login to F5 XC Distributed Cloud to obtain an API certificate p12
-#  file for automation.
-f5xc_api_p12_file = "./protected-se.p12"
-f5xc_tenant       = "f5-emea-ent"
-f5xc_tenant_full  = "f5-emea-ent-bceuutam"
-f5xc_namespace    = "s-archer"
-
 # Choose a unique prefix/suffix for object names (suggest a short version of application name)
 f5xc_prefix = "arch"
 f5xc_suffix = "nocode-example"
@@ -19,7 +11,7 @@ f5xc_cert       = "arch-nocode-f5xc-co-uk"
 
 # If using an API swagger file, upload into the terraform root folder (same folder as this 
 #  readme) and add the name of the file here.  And set fromat to either "json" or "yaml".
-f5xc_swagger_filename = "swagger-juice-v3.json"
+f5xc_swagger_filename = "swagger-juice-v1.json"
 f5xc_swagger_format   = "json"
 
 # Configure the upstream target origin servers (and port), where we will send  
@@ -42,3 +34,11 @@ f5xc_origin-healthcheck-path = "/"
 #   azure
 #
 f5xc_cloud = "azure"
+
+# F5 Distributed Cloud Tenant Details
+# You will need to login to F5 XC Distributed Cloud to obtain an API certificate p12
+#  file for automation.
+f5xc_api_p12_file = "./protected-se.p12"
+f5xc_tenant       = "f5-emea-ent"
+f5xc_tenant_full  = "f5-emea-ent-bceuutam"
+f5xc_namespace    = "s-archer"
